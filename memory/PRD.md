@@ -30,7 +30,7 @@ Premium multilingual (ES/EN/FR) single-page luxury personal-brand landing page f
 - Verified: ES/EN/FR switching, localStorage persistence, lightbox, FAQ, OnlyFans link, disabled WhatsApp/Telegram/payment, noindex meta.
 
 ## Known Stage-2 handoff (TODO-CODEX)
-- **Photography**: Only 4 approved portraits were supplied; reused across 7 slots (IMAGE 05 red-stool, 06 olive-green, 07 red-seated missing). Replace in `src/lib/images.js` when files arrive.
+- All 7 approved portraits now supplied and mapped in `src/lib/images.js` (IMAGE 01–07).
 - Logo: refined CSS gold wordmark used (no clean logo raster supplied). Refine to final vector.
 - Integrations pending: WhatsApp number, Telegram URL, payment provider/deposit, final domain + canonical, final robots/meta, final legal text.
 

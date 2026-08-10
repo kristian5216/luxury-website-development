@@ -43,7 +43,7 @@ export const Travel = () => {
             <div className="relative overflow-hidden" style={{ aspectRatio: portraits.travel.aspectRatio, border: "1px solid var(--brown)" }}>
               <motion.img
                 src={portraits.travel.src}
-                alt={t.gallery.alt.brown}
+                alt={t.gallery.alt.olive}
                 loading="lazy"
                 className="h-[112%] w-full object-cover"
                 style={{ objectPosition: portraits.travel.objectPositionDesktop, y }}

@@ -73,7 +73,7 @@ export const Contact = () => {
             <div className="relative overflow-hidden" style={{ aspectRatio: portraits.contact.aspectRatio, border: "1px solid var(--brown)" }}>
               <img
                 src={portraits.contact.src}
-                alt={t.gallery.alt.whiteSeated}
+                alt={t.gallery.alt.redChair}
                 loading="lazy"
                 className="h-full w-full object-cover"
                 style={{ objectPosition: portraits.contact.objectPositionDesktop }}
