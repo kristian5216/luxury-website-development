@@ -1,0 +1,113 @@
+{
+  "theme": "dark",
+  "project_type": "luxury_landing_page",
+  "brand_name": "MAYKA SAINTT",
+  "typography": {
+    "primary_font": "Cormorant Garamond, serif",
+    "secondary_font": "Inter, sans-serif",
+    "usage": {
+      "headings": "Cormorant Garamond for all headings. Sizes should scale fluidly up to 88px on desktop (text-5xl to text-[88px]). Use tight tracking (tracking-tight) and tight line height (leading-[0.95]).",
+      "body": "Inter for body text, typically 16px-18px (text-base md:text-lg) with relaxed line height (leading-relaxed).",
+      "eyebrows": "Inter, small (text-xs or text-sm), uppercase, wide tracking (tracking-widest).",
+      "quotes": "Cormorant Garamond, italic, text-2xl to text-4xl."
+    }
+  },
+  "colors": {
+    "primary_black": "#0B0A09",
+    "deep_charcoal": "#151311",
+    "warm_ivory": "#F4F0E8",
+    "cream": "#EAE2D6",
+    "champagne": "#C8AA72",
+    "muted_gold": "#B7985D",
+    "warm_taupe": "#75675D",
+    "deep_brown": "#392D28",
+    "burgundy_accent": "#70252B",
+    "text_dark": "#201D1A",
+    "text_light": "#F7F3EC"
+  },
+  "layouts": {
+    "spacing_philosophy": "Generous whitespace. Use py-24, py-32, or py-48 for section spacing. Never cramp content.",
+    "grid_system": "12-column grid. Prioritize controlled asymmetry over perfectly centered layouts.",
+    "container": "max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24",
+    "masonry": "Use CSS columns (columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4) for the gallery."
+  },
+  "motion": {
+    "libraries": ["framer-motion", "lenis"],
+    "hero_reveal": "Cinematic kinetic hero with masked line-by-line reveal. Timing: 450-800ms, stagger 100ms. Easing: cubic-bezier(0.16, 1, 0.3, 1).",
+    "scroll_reveal": "Fade up with very subtle parallax on scroll. No bouncing, spinning, or heavy scaling.",
+    "marquee": "Slow editorial marquee. Timing: very slow, continuous loop.",
+    "accessibility": "Always respect prefers-reduced-motion for all framer-motion animations."
+  },
+  "components": {
+    "AgeGate": {
+      "description": "Full screen overlay on load. Solid background (#0B0A09) to hide content until accepted. Buttons for 'Enter' and 'Exit'."
+    },
+    "Navigation": {
+      "description": "Sticky transparent->opaque navigation. Starts transparent, transitions to background: #0B0A09 on scroll (no blur, just solid color for luxury feel). Includes language switcher (ES/EN/FR). Do not use a hamburger menu on desktop."
+    },
+    "Hero": {
+      "description": "Cinematic kinetic hero. Contains positioning pull-quote and masked line-by-line reveal of the main heading."
+    },
+    "ManifestoChapters": {
+      "description": "Numbered 01-04 sections (About, Travel, Philosophy, Ideal Client). Use thin divider lines (#392D28) and large numbers. Layouts should be asymmetrical, weaving text and images."
+    },
+    "ImageBreak": {
+      "description": "Large editorial photo break. Full-width or wide-container with slight parallax effect via framer-motion."
+    },
+    "Gallery": {
+      "description": "Editorial masonry layout. Clicking an image opens a fullscreen lightbox. Lightbox must have opaque background (#0B0A09), prev/next controls, image counter (e.g., 1/12), and keyboard navigation (Arrows/Escape)."
+    },
+    "FAQ": {
+      "description": "Accordion style. Thin divider lines (#392D28) separating questions. Clean interactions. Use Radix/Shadcn accordion but styled heavily to match the brand."
+    },
+    "Contact": {
+      "description": "Private contact section. Must include exact text: hours 10:00-22:00, España · Disponibilidad internacional."
+    },
+    "Footer": {
+      "description": "Premium dark footer. Incorporates the OnlyFans CTA elegantly (discreet, sophisticated). Links for privacy/terms."
+    }
+  },
+  "visual_enhancers": {
+    "dividers": "1px solid #392D28",
+    "buttons": "Sharp minimal rectangles or pill-shaped. Minimal borders (1px solid #392D28 or #C8AA72). Hover shifts background slightly to #151311.",
+    "textures": "Subtle noise overlay on the primary background (#0B0A09) to give it a physical editorial feel."
+  },
+  "images": {
+    "hero_abstract": {
+      "url": "https://images.unsplash.com/photo-1635151227785-429f420c6b9d",
+      "description": "Elegant abstract black texture for dark hero accents or age gate background."
+    },
+    "editorial_portrait_1": {
+      "url": "https://images.pexels.com/photos/1066171/pexels-photo-1066171.jpeg",
+      "description": "Moody, fashionable portrait model."
+    },
+    "editorial_portrait_2": {
+      "url": "https://images.pexels.com/photos/38290948/pexels-photo-38290948.jpeg",
+      "description": "Stylish model in red suit."
+    },
+    "travel_hotel": {
+      "url": "https://images.pexels.com/photos/33803745/pexels-photo-33803745.jpeg",
+      "description": "Elegant corridor of a heritage hotel, representing international travel."
+    },
+    "accent_texture": {
+      "url": "https://images.unsplash.com/photo-1721549369164-2fd07f795ce4",
+      "description": "Curved black design for breaks and transitions."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Create a configuration file (e.g., config.js or content.js) to store all texts in ES, EN, FR. Implement a simple context or state to toggle languages.",
+    "Use Framer Motion for scroll animations and the hero masked line-by-line reveal.",
+    "Use Lenis for smooth scrolling.",
+    "Ensure 'data-testid' attributes are added to all interactive elements (buttons, nav links, language toggles, accordions, gallery items).",
+    "Avoid standard SaaS look. Strip Shadcn components (if used) of default borders, shadows, and rounded corners to fit the luxury aesthetic.",
+    "No explicit content, imagery, or tones. The OnlyFans CTA must be handled as a premium, exclusive members-club link.",
+    "Implement the gallery lightbox securely, without a transparent background behind the image to ensure clear visibility.",
+    "Set <meta name=\"robots\" content=\"noindex\"> in the document head for privacy-oriented requirement."
+  ],
+  "accessibility": {
+    "contrast": "Ensure text light #F7F3EC meets contrast standards against #0B0A09 and #151311.",
+    "motion": "Respect prefers-reduced-motion media query. If reduced motion is requested, disable parallax and scroll reveals.",
+    "aria": "Use aria-expanded for accordions, aria-hidden for decorative lines."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": "Do not use generic centered layouts. Create depth with layering. Use generous spacing (p-12, p-24, py-32). Add micro-animations to all interactive elements. Do not use AI emojis. Implement language switching text dynamically. DO NOT use generic Shadcn cards without heavily stripping their default borders/backgrounds to match the luxury aesthetic. Adhere strictly to the color palette."
+}
