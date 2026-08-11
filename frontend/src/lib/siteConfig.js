@@ -9,8 +9,8 @@ export const siteConfig = {
   // TODO-CODEX-SEO: Verify final robots/meta privacy settings immediately before production deployment.
   indexingEnabled: false,
 
-  // TODO-CODEX-INTEGRATION: Configure final production domain and canonical URL after domain purchase.
-  domain: "",
+  // Final production domain — confirmed by client 2026-08-10.
+  domain: "maykasaintt.com",
 
   defaultLanguage: "es",
   languages: ["es", "en", "fr"],
