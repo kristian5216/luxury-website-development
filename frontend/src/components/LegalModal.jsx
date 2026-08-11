@@ -2,12 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useLanguage } from "@/lib/translations";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 
 // TODO-CODEX-CONTENT: Replace provisional legal text after final legal information is supplied.
 export const LegalModal = ({ type, onClose }) => {
   const { t } = useLanguage();
   const open = type !== null;
   const closeRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useFocusTrap(containerRef, open);
 
   useEffect(() => {
     if (!open) return;
@@ -28,6 +32,7 @@ export const LegalModal = ({ type, onClose }) => {
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={containerRef}
           className="fixed inset-0 z-[95] flex items-center justify-center px-5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

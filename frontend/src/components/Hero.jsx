@@ -5,7 +5,8 @@ import { useLanguage } from "@/lib/translations";
 import { MaskedLines, scrollToId } from "@/lib/motion";
 import { portraits } from "@/lib/images";
 
-// TODO-CODEX-ANIMATION: Refine hero choreography and add subtle image depth movement.
+// Editorial entrance cascade: image reveal (0ms) → eyebrow (~150ms) → heading (~300ms,
+// via MaskedLines) → paragraph (~550ms) → CTAs (~750ms) → scroll indicator (~950ms).
 export const Hero = () => {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
@@ -29,26 +30,29 @@ export const Hero = () => {
             className="eyebrow"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
           >
             {t.hero.eyebrow}
           </motion.p>
-          <h1 className="mt-7 font-serif text-[2.65rem] leading-[1.02] text-[color:var(--ivory)] sm:text-6xl lg:text-[4.4rem] xl:text-[5rem]">
-            <MaskedLines lines={titleLines} delay={0.35} lineClass="italic" />
+          <h1
+            className="mt-7 font-serif leading-[1.02] text-[color:var(--ivory)]"
+            style={{ fontSize: "clamp(2.65rem, 2rem + 4vw, 5rem)" }}
+          >
+            <MaskedLines lines={titleLines} delay={0.3} lineClass="italic" />
           </h1>
           <motion.p
             className="mt-8 max-w-md text-sm leading-relaxed text-[color:var(--taupe)] md:text-base"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
             {t.hero.support}
           </motion.p>
           <motion.div
             className="mt-11 flex flex-col gap-4 sm:flex-row"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
           >
             <button onClick={() => scrollToId("about")} className="btn-lux btn-lux--solid" data-testid="hero-cta-discover">
               {t.hero.ctaPrimary}
@@ -65,16 +69,16 @@ export const Hero = () => {
           <motion.div
             className="relative mx-auto w-full max-w-[420px] overflow-hidden lg:max-w-none"
             style={{ aspectRatio: portraits.hero.aspectRatio, border: "1px solid var(--brown)" }}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 24, scale: reduce ? 1 : 1.035 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.img
               src={portraits.hero.src}
               alt={t.gallery.alt.whiteSeated}
               fetchpriority="high"
-              className="h-full w-full object-cover"
-              style={{ objectPosition: portraits.hero.objectPositionDesktop, y: imgY, scale: imgScale }}
+              className="obj-pos h-full w-full object-cover"
+              style={{ "--op-m": portraits.hero.objectPositionMobile, "--op-d": portraits.hero.objectPositionDesktop, y: imgY, scale: imgScale }}
             />
             <div className="pointer-events-none absolute inset-0" style={{ boxShadow: "inset 0 -120px 120px -60px rgba(11,10,9,0.7)" }} />
           </motion.div>
@@ -87,7 +91,7 @@ export const Hero = () => {
         className="absolute bottom-7 left-1/2 z-[4] flex -translate-x-1/2 flex-col items-center gap-2 text-[color:var(--taupe)]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 0.95, duration: 0.8 }}
         aria-label={t.hero.scroll}
         data-testid="hero-scroll-indicator"
       >

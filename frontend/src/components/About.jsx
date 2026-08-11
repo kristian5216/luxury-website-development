@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from "@/lib/translations";
-import { Reveal } from "@/lib/motion";
+import { Reveal, ImageReveal } from "@/lib/motion";
 import { portraits } from "@/lib/images";
 
 export const About = () => {
@@ -10,17 +10,17 @@ export const About = () => {
       <div className="container-lux grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
         {/* Image left */}
         <div className="lg:col-span-5">
-          <Reveal>
+          <ImageReveal direction="left">
             <div className="relative overflow-hidden" style={{ aspectRatio: portraits.about.aspectRatio, border: "1px solid var(--brown)" }}>
               <img
                 src={portraits.about.src}
                 alt={t.gallery.alt.brown}
                 loading="lazy"
-                className="h-full w-full object-cover"
-                style={{ objectPosition: portraits.about.objectPositionDesktop }}
+                className="obj-pos h-full w-full object-cover"
+                style={{ "--op-m": portraits.about.objectPositionMobile, "--op-d": portraits.about.objectPositionDesktop }}
               />
             </div>
-          </Reveal>
+          </ImageReveal>
         </div>
         {/* Text right */}
         <div className="lg:col-span-6 lg:col-start-7 lg:flex lg:flex-col lg:justify-center">

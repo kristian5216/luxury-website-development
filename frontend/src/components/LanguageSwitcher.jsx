@@ -19,7 +19,7 @@ export const LanguageSwitcher = ({ className = "", size = "sm" }) => {
             onClick={() => changeLang(code)}
             data-testid={`lang-${code}`}
             aria-pressed={lang === code}
-            className="uppercase tracking-[0.2em] transition-colors duration-500"
+            className="inline-block py-2 uppercase tracking-[0.2em] transition-colors duration-500"
             style={{
               color: lang === code ? "var(--champagne)" : "var(--taupe)",
               fontWeight: lang === code ? 500 : 300,

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/lib/translations";
-import { Reveal } from "@/lib/motion";
+import { Reveal, ImageReveal } from "@/lib/motion";
 import { portraits } from "@/lib/images";
 
-// TODO-CODEX-ANIMATION: Add subtle image depth movement.
+// Subtle desktop-and-mobile scroll parallax (disabled under prefers-reduced-motion via `reduce`).
 export const Travel = () => {
   const { t } = useLanguage();
   const reduce = useReducedMotion();
@@ -29,7 +29,12 @@ export const Travel = () => {
           </Reveal>
           <Reveal delay={0.12}>
             <div className="mt-10 flex items-end gap-5">
-              <span className="gold-metallic font-serif text-7xl leading-none md:text-8xl">{t.travel.count}</span>
+              <span
+                className="gold-metallic font-serif leading-none"
+                style={{ fontSize: "clamp(4.5rem, 3rem + 5vw, 6rem)" }}
+              >
+                {t.travel.count}
+              </span>
               <span className="mb-2 text-sm uppercase tracking-[0.25em] text-[color:var(--taupe)]">{t.travel.countLabel}</span>
             </div>
           </Reveal>
@@ -39,17 +44,17 @@ export const Travel = () => {
           </div>
         </div>
         <div className="lg:col-span-5 lg:col-start-8">
-          <Reveal delay={0.1}>
+          <ImageReveal direction="right" delay={0.1}>
             <div className="relative overflow-hidden" style={{ aspectRatio: portraits.travel.aspectRatio, border: "1px solid var(--brown)" }}>
               <motion.img
                 src={portraits.travel.src}
                 alt={t.gallery.alt.olive}
                 loading="lazy"
-                className="h-[112%] w-full object-cover"
-                style={{ objectPosition: portraits.travel.objectPositionDesktop, y }}
+                className="obj-pos h-[112%] w-full object-cover"
+                style={{ "--op-m": portraits.travel.objectPositionMobile, "--op-d": portraits.travel.objectPositionDesktop, y }}
               />
             </div>
-          </Reveal>
+          </ImageReveal>
         </div>
       </div>
     </section>

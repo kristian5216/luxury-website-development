@@ -18,7 +18,12 @@ export const Gallery = () => {
         <div className="mb-16 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="eyebrow">{t.gallery.label}</span>
-            <h2 className="mt-5 font-serif text-5xl text-[color:var(--ivory)] md:text-7xl">{t.gallery.title}</h2>
+            <h2
+              className="mt-5 font-serif text-[color:var(--ivory)]"
+              style={{ fontSize: "clamp(3rem, 2rem + 4vw, 4.5rem)" }}
+            >
+              {t.gallery.title}
+            </h2>
           </div>
           <p className="max-w-xs text-sm text-[color:var(--taupe)]">{t.gallery.subtitle}</p>
         </div>

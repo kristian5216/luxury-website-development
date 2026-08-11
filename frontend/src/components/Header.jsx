@@ -10,13 +10,7 @@ export const Header = () => {
   const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [active, setActive] = useState("hero");
 
   const links = [
     { id: "hero", label: t.nav.home },
@@ -26,6 +20,34 @@ export const Header = () => {
     { id: "faq", label: t.nav.faq },
     { id: "contact", label: t.nav.contact },
   ];
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Active-section highlighting — lightweight IntersectionObserver over the nav's own ids.
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.getElementById(l.id))
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   return (
     <>
@@ -40,20 +62,38 @@ export const Header = () => {
       >
         <div className="container-lux flex items-center justify-between py-4 md:py-5">
           <button onClick={() => scrollToId("hero")} data-testid="header-logo-btn" aria-label="MAYKA">
-            <Logo size="sm" />
+            <Logo size="sm" variant="compact" />
           </button>
 
           <nav className="hidden items-center gap-9 lg:flex" data-testid="desktop-nav">
-            {links.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => scrollToId(l.id)}
-                data-testid={`nav-${l.id}`}
-                className="text-xs uppercase tracking-[0.2em] text-[color:var(--ivory)] transition-colors duration-500 hover:text-[color:var(--champagne)]"
-              >
-                {l.label}
-              </button>
-            ))}
+            {links.map((l) => {
+              const isActive = active === l.id;
+              return (
+                <button
+                  key={l.id}
+                  onClick={() => scrollToId(l.id)}
+                  data-testid={`nav-${l.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className="group relative py-1 text-xs uppercase tracking-[0.2em] transition-colors duration-500"
+                  style={{ color: isActive ? "var(--champagne)" : "var(--ivory)" }}
+                >
+                  {l.label}
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-0.5 left-0 h-px w-full origin-left transition-transform duration-500 ease-out"
+                    style={{
+                      backgroundColor: "var(--champagne)",
+                      transform: isActive ? "scaleX(1)" : "scaleX(0)",
+                    }}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100"
+                    style={{ backgroundColor: "var(--champagne)", opacity: isActive ? 0 : 1 }}
+                  />
+                </button>
+              );
+            })}
           </nav>
 
           <div className="hidden lg:block">
@@ -64,6 +104,8 @@ export const Header = () => {
             className="p-1 text-[color:var(--ivory)] lg:hidden"
             onClick={() => setMenuOpen(true)}
             aria-label={t.a11y.openMenu}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             data-testid="mobile-menu-open"
           >
             <Menu size={26} strokeWidth={1} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from "@/lib/translations";
-import { Reveal } from "@/lib/motion";
+import { Reveal, ImageReveal } from "@/lib/motion";
 import { portraits } from "@/lib/images";
 
 export const Philosophy = () => {
@@ -18,24 +18,29 @@ export const Philosophy = () => {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
-              <h2 className="mt-6 font-serif text-5xl text-[color:var(--ivory)] md:text-6xl">{t.philosophy.title}</h2>
+              <h2
+                className="mt-6 font-serif text-[color:var(--ivory)]"
+                style={{ fontSize: "clamp(3rem, 2.4rem + 2.5vw, 3.75rem)" }}
+              >
+                {t.philosophy.title}
+              </h2>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-8 max-w-md font-serif text-xl italic leading-snug text-[color:var(--taupe)]">
                 {t.philosophy.intro}
               </p>
             </Reveal>
-            <Reveal delay={0.16}>
+            <ImageReveal direction="left" delay={0.16}>
               <div className="mt-10 hidden overflow-hidden lg:block" style={{ aspectRatio: "4 / 5", border: "1px solid var(--brown)" }}>
                 <img
                   src={portraits.philosophy.src}
                   alt={t.gallery.alt.black}
                   loading="lazy"
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: portraits.philosophy.objectPositionDesktop }}
+                  className="obj-pos h-full w-full object-cover"
+                  style={{ "--op-m": portraits.philosophy.objectPositionMobile, "--op-d": portraits.philosophy.objectPositionDesktop }}
                 />
               </div>
-            </Reveal>
+            </ImageReveal>
           </div>
 
           {/* Right: numbered principles */}

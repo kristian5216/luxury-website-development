@@ -67,6 +67,15 @@ body {
   p { margin: 0; }
   a { color: inherit; text-decoration: none; }
   button { font-family: var(--font-sans); cursor: pointer; }
+
+  /* Designed keyboard focus indicator — gold, not the browser default. */
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--champagne);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
 }
 
 @layer components {
@@ -99,19 +108,37 @@ body {
     background: rgba(57, 45, 40, 0.9);
   }
 
-  /* Metallic gold text treatment for the wordmark */
+  /* Centrally-defined per-image crops (lib/images.js) applied responsively:
+     mobile crop below md, desktop crop from md up. See portraits.*.objectPositionMobile/Desktop. */
+  .obj-pos {
+    object-position: var(--op-m, 50% 50%);
+  }
+  @media (min-width: 768px) {
+    .obj-pos {
+      object-position: var(--op-d, 50% 50%);
+    }
+  }
+
+  /* Metallic gold text treatment for the wordmark — warm, restrained, not a casino gradient. */
   .gold-metallic {
     background: linear-gradient(
-      180deg,
-      #e8d6a8 0%,
-      #c8aa72 38%,
-      #9c8047 60%,
-      #d8c089 100%
+      120deg,
+      #8c6b35 0%,
+      #e1c58c 26%,
+      #b69354 50%,
+      #f1dca3 74%,
+      #96723b 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: var(--champagne);
+    text-shadow: 0 1px 12px rgba(200, 170, 114, 0.14);
+  }
+
+  /* Logo variant="light" — solid deep charcoal/espresso, for use on light backgrounds. */
+  .logo-solid-light {
+    color: var(--text-dark);
   }
 
   .btn-lux {

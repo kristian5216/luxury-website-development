@@ -43,8 +43,10 @@ export const portraits = {
     id: "white-standing",
     src: P04_WHITE_STAND,
     aspectRatio: "4 / 5",
-    objectPositionDesktop: "50% 18%",
-    objectPositionMobile: "50% 14%",
+    // Shifted right (vs. the 50% used elsewhere for this portrait) to leave clear room
+    // for the overlaid editorial words on the left, per the gradient composition below.
+    objectPositionDesktop: "70% 18%",
+    objectPositionMobile: "70% 14%",
   },
   positioning: {
     id: "white-standing-pos",

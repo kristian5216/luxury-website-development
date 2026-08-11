@@ -3,22 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "@/components/Logo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/lib/translations";
+import { useFocusTrap } from "@/lib/useFocusTrap";
 
 const STORAGE_KEY = "mayka_age_ok";
 
 export const AgeGate = ({ confirmed, onConfirm }) => {
   const { t } = useLanguage();
   const enterRef = useRef(null);
-
-  useEffect(() => {
-    if (confirmed) return;
-    document.body.style.overflow = "hidden";
-    const id = setTimeout(() => enterRef.current?.focus(), 400);
-    return () => {
-      document.body.style.overflow = "";
-      clearTimeout(id);
-    };
-  }, [confirmed]);
+  const containerRef = useRef(null);
 
   const accept = () => {
     localStorage.setItem(STORAGE_KEY, "true");
@@ -28,10 +20,27 @@ export const AgeGate = ({ confirmed, onConfirm }) => {
     window.location.href = "https://www.google.com";
   };
 
+  useFocusTrap(containerRef, !confirmed);
+
+  useEffect(() => {
+    if (confirmed) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e) => e.key === "Escape" && exit();
+    window.addEventListener("keydown", onKey);
+    const id = setTimeout(() => enterRef.current?.focus(), 400);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+      clearTimeout(id);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [confirmed]);
+
   return (
     <AnimatePresence>
       {!confirmed && (
         <motion.div
+          ref={containerRef}
           className="fixed inset-0 z-[100] flex items-center justify-center px-6 grain"
           style={{ background: "var(--black)" }}
           initial={{ opacity: 1 }}

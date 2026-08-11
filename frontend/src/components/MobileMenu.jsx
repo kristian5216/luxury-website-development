@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { Logo } from "@/components/Logo";
@@ -8,25 +8,56 @@ import { scrollToId } from "@/lib/motion";
 
 export const MobileMenu = ({ open, onClose, links }) => {
   const { t } = useLanguage();
+  const closeRef = useRef(null);
+  const lastFocused = useRef(null);
+
   const go = (id) => {
     onClose();
     setTimeout(() => scrollToId(id), 260);
   };
+
+  const handleKey = useCallback(
+    (e) => {
+      if (e.key === "Escape") onClose();
+    },
+    [onClose]
+  );
+
+  // Body scroll lock + Escape-to-close + focus restore — same pattern as GalleryLightbox/AgeGate.
+  useEffect(() => {
+    if (!open) return;
+    lastFocused.current = document.activeElement;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKey);
+    const id = setTimeout(() => closeRef.current?.focus(), 300);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
+      clearTimeout(id);
+      if (lastFocused.current instanceof HTMLElement) lastFocused.current.focus();
+    };
+  }, [open, handleKey]);
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
+          id="mobile-menu"
           className="fixed inset-0 z-[70] lg:hidden"
           style={{ background: "var(--black)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.nav.menu}
           data-testid="mobile-menu"
         >
           <div className="flex items-center justify-between px-6 pt-7">
-            <Logo size="sm" />
+            <Logo size="sm" variant="compact" />
             <button
+              ref={closeRef}
               onClick={onClose}
               aria-label={t.a11y.closeMenu}
               data-testid="mobile-menu-close"

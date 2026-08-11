@@ -1,7 +1,7 @@
 import React from "react";
 import { Clock, MapPin } from "lucide-react";
 import { useLanguage } from "@/lib/translations";
-import { Reveal } from "@/lib/motion";
+import { Reveal, ImageReveal } from "@/lib/motion";
 import { siteConfig } from "@/lib/siteConfig";
 import { portraits } from "@/lib/images";
 import { DepositButton } from "@/components/DepositButton";
@@ -17,7 +17,12 @@ export const Contact = () => {
         <div className="lg:col-span-6">
           <Reveal><span className="eyebrow">{t.contact.label}</span></Reveal>
           <Reveal delay={0.08}>
-            <h2 className="mt-6 font-serif text-5xl leading-tight text-[color:var(--ivory)] md:text-6xl">{t.contact.title}</h2>
+            <h2
+              className="mt-6 font-serif leading-tight text-[color:var(--ivory)]"
+              style={{ fontSize: "clamp(3rem, 2.4rem + 2.5vw, 3.75rem)" }}
+            >
+              {t.contact.title}
+            </h2>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-[color:var(--taupe)] md:text-base">{t.contact.intro}</p>
@@ -69,17 +74,17 @@ export const Contact = () => {
         </div>
 
         <div className="lg:col-span-5 lg:col-start-8">
-          <Reveal delay={0.1}>
+          <ImageReveal direction="right" delay={0.1}>
             <div className="relative overflow-hidden" style={{ aspectRatio: portraits.contact.aspectRatio, border: "1px solid var(--brown)" }}>
               <img
                 src={portraits.contact.src}
                 alt={t.gallery.alt.redChair}
                 loading="lazy"
-                className="h-full w-full object-cover"
-                style={{ objectPosition: portraits.contact.objectPositionDesktop }}
+                className="obj-pos h-full w-full object-cover"
+                style={{ "--op-m": portraits.contact.objectPositionMobile, "--op-d": portraits.contact.objectPositionDesktop }}
               />
             </div>
-          </Reveal>
+          </ImageReveal>
         </div>
       </div>
     </section>
