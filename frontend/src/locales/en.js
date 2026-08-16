@@ -22,7 +22,7 @@ const en = {
   },
   hero: {
     eyebrow: "PRIVATE · INTERNATIONAL",
-    title: "An experience for those who value quality, discretion and their time.",
+    title: "An experience for those who value their time, their money and, above all, quality.",
     support:
       "A personal space created for those who appreciate considered attention, respectful communication and an experience defined by the details.",
     ctaPrimary: "Discover",

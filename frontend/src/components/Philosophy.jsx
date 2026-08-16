@@ -34,7 +34,7 @@ export const Philosophy = () => {
               <div className="mt-10 hidden overflow-hidden lg:block" style={{ aspectRatio: "4 / 5", border: "1px solid var(--brown)" }}>
                 <img
                   src={portraits.philosophy.src}
-                  alt={t.gallery.alt.black}
+                  alt={t.gallery.alt.whiteSeated}
                   loading="lazy"
                   className="obj-pos h-full w-full object-cover"
                   style={{ "--op-m": portraits.philosophy.objectPositionMobile, "--op-d": portraits.philosophy.objectPositionDesktop }}

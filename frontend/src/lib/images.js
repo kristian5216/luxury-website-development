@@ -12,11 +12,12 @@ const P07_RED_CHAIR = "/brand/img07-red-chair.png"; // IMAGE 07 — red suit, se
 
 export const portraits = {
   hero: {
-    id: "white-seated",
-    src: P03_WHITE_SEATED,
+    // Client feedback: hero should use the black-clothing portrait.
+    id: "black-tailored",
+    src: P01_BLACK,
     aspectRatio: "3 / 4",
-    objectPositionDesktop: "50% 22%",
-    objectPositionMobile: "50% 18%",
+    objectPositionDesktop: "50% 18%",
+    objectPositionMobile: "50% 12%",
   },
   about: {
     id: "brown-seated",
@@ -26,11 +27,11 @@ export const portraits = {
     objectPositionMobile: "50% 15%",
   },
   philosophy: {
-    id: "black-tailored",
-    src: P01_BLACK,
+    id: "white-seated",
+    src: P03_WHITE_SEATED,
     aspectRatio: "3 / 4",
-    objectPositionDesktop: "50% 18%",
-    objectPositionMobile: "50% 12%",
+    objectPositionDesktop: "50% 22%",
+    objectPositionMobile: "50% 18%",
   },
   travel: {
     id: "olive-green",

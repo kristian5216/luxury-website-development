@@ -24,7 +24,7 @@ const es = {
   hero: {
     eyebrow: "PRIVATE · INTERNATIONAL",
     title:
-      "Una experiencia para quienes valoran la calidad, la discreción y su tiempo.",
+      "Una experiencia para quienes valoran su tiempo, su dinero y, por encima de todo, la calidad.",
     support:
       "Un espacio personal creado para quienes aprecian la atención cuidada, la comunicación respetuosa y una experiencia definida por los detalles.",
     ctaPrimary: "Descubrir",

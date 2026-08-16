@@ -75,7 +75,7 @@ export const Hero = () => {
           >
             <motion.img
               src={portraits.hero.src}
-              alt={t.gallery.alt.whiteSeated}
+              alt={t.gallery.alt.black}
               fetchpriority="high"
               className="obj-pos h-full w-full object-cover"
               style={{ "--op-m": portraits.hero.objectPositionMobile, "--op-d": portraits.hero.objectPositionDesktop, y: imgY, scale: imgScale }}
